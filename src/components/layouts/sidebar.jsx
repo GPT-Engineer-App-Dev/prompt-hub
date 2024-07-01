@@ -2,23 +2,21 @@ import {
   Bell,
   CircleUser,
   Home,
-  LineChart,
+  List,
   Menu,
-  Package,
   Package2,
+  Plus,
   Search,
-  ShoppingCart,
-  Users,
-} from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,10 +24,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Outlet } from "react-router-dom";
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { NavLink, Outlet } from "react-router-dom";
 
 function SharedLayout() {
   return (
@@ -39,18 +37,44 @@ function SharedLayout() {
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
             <a href="/" className="flex items-center gap-2 font-semibold">
               <Package2 className="h-6 w-6" />
-              <span className="">Acme Inc</span>
+              <span className="">Prompt Manager</span>
             </a>
           </div>
           <div className="flex-1">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-              <a
-                href="#"
-                className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                    isActive ? "bg-muted text-primary" : "text-muted-foreground hover:text-foreground"
+                  }`
+                }
               >
                 <Home className="h-4 w-4" />
                 Home
-              </a>
+              </NavLink>
+              <NavLink
+                to="/prompts"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                    isActive ? "bg-muted text-primary" : "text-muted-foreground hover:text-foreground"
+                  }`
+                }
+              >
+                <List className="h-4 w-4" />
+                Prompts
+              </NavLink>
+              <NavLink
+                to="/prompts/new"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${
+                    isActive ? "bg-muted text-primary" : "text-muted-foreground hover:text-foreground"
+                  }`
+                }
+              >
+                <Plus className="h-4 w-4" />
+                Add Prompt
+              </NavLink>
             </nav>
           </div>
         </div>
@@ -70,20 +94,50 @@ function SharedLayout() {
             </SheetTrigger>
             <SheetContent side="left" className="flex flex-col">
               <nav className="grid gap-2 text-lg font-medium">
-                <a
-                  href="#"
-                  className="flex items-center gap-2 text-lg font-semibold"
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    `flex items-center gap-2 text-lg font-semibold ${
+                      isActive ? "bg-muted text-primary" : "text-muted-foreground hover:text-foreground"
+                    }`
+                  }
                 >
                   <Package2 className="h-6 w-6" />
-                  <span className="sr-only">Acme Inc</span>
-                </a>
-                <a
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                  <span className="sr-only">Prompt Manager</span>
+                </NavLink>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    `mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 ${
+                      isActive ? "bg-muted text-primary" : "text-muted-foreground hover:text-foreground"
+                    }`
+                  }
                 >
                   <Home className="h-5 w-5" />
                   Home
-                </a>
+                </NavLink>
+                <NavLink
+                  to="/prompts"
+                  className={({ isActive }) =>
+                    `mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 ${
+                      isActive ? "bg-muted text-primary" : "text-muted-foreground hover:text-foreground"
+                    }`
+                  }
+                >
+                  <List className="h-5 w-5" />
+                  Prompts
+                </NavLink>
+                <NavLink
+                  to="/prompts/new"
+                  className={({ isActive }) =>
+                    `mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 ${
+                      isActive ? "bg-muted text-primary" : "text-muted-foreground hover:text-foreground"
+                    }`
+                  }
+                >
+                  <Plus className="h-5 w-5" />
+                  Add Prompt
+                </NavLink>
               </nav>
             </SheetContent>
           </Sheet>
@@ -112,7 +166,7 @@ function SharedLayout() {
         </main>
       </div>
     </div>
-  )
+  );
 }
 
 export default SharedLayout;
